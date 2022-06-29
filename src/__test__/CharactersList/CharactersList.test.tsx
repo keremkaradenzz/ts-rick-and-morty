@@ -1,7 +1,7 @@
 import CharactersList from "../../components/CharactersList/CharactersList";
 import { MockedProvider } from "@apollo/client/testing";
 import { GET_CHARACTERS } from "../../graphql/queries/queries";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import ReactDOM from "react-dom/client";
 
