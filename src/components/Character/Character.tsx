@@ -12,7 +12,8 @@ const CharacterContainer = styled.div`
   -moz-box-shadow: 6px 5px 10px 4px rgba(222, 222, 222, 0.65);
   box-shadow: 6px 5px 10px 4px rgba(222, 222, 222, 0.65);
   margin-bottom: 48px;
-  margin-left: 80px;
+  margin-left: 40px;
+  margin-right: 40px;
 `;
 
 const ImageContainer = styled.div`
@@ -24,6 +25,11 @@ const DetailContainer = styled.div`
   justify-content: space-between;
   flex-direction: column;
   padding: 10px;
+`;
+
+const TextDiv = styled.div`
+  margin-top: 16px;
+  margin-left: 16px;
 `;
 
 const Character: React.FC<ICharacter> = ({ id, name, image, location }) => {
@@ -39,18 +45,20 @@ const Character: React.FC<ICharacter> = ({ id, name, image, location }) => {
         />
       </ImageContainer>
       <DetailContainer>
-        <div>
-          <strong>#id : </strong> {id}
-        </div>
-        <div>
+        <TextDiv>
+          <strong>#id : </strong>
+          <span style={{ color: "#808080" }}>{id}</span>
+        </TextDiv>
+        <TextDiv>
           <div>
             <strong>Name : </strong>
-            {name}
+            <span style={{ color: "#808080" }}>{name}</span>
           </div>
-          <div>
-            <strong>Location :</strong> {location.name}
+          <div style={{ marginTop: 11, marginBottom: 19 }}>
+            <strong>Location :</strong>{" "}
+            <span style={{ color: "#808080" }}>{location.name}</span>
           </div>
-        </div>
+        </TextDiv>
       </DetailContainer>
     </CharacterContainer>
   );

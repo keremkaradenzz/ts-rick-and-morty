@@ -6,12 +6,33 @@ import styled from "styled-components";
 import FilterModal from "../FilterModal/FilterModal";
 
 const CharactersContainer = styled.div`
-  flex-wrap: wrap;
-  flex-direction: row;
-  min-height: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  flex-basis: 50%;
+`;
+
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  font-size: 14px;
+  line-height: 16px;
+`;
+
+const FilterDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-basis: 20%;
+  margin-left: 20px;
+  margin-top: 155px;
+  margin-bottom: 50px;
+  font-weight: 600;
+  margin-bottom: 48px;
 `;
 
 const CharactersList: React.FC = () => {
@@ -52,12 +73,21 @@ const CharactersList: React.FC = () => {
   return (
     <div style={{ width: "100%" }}>
       <div
-        style={{ margin: '30px', display: "flex", justifyContent:'center' }}
-        onClick={() => setModalIsOpen((prevState) => !prevState)}
-        data-testid='modal-test-button'
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          width: "100%",
+        }}
       >
-        Filter Character &nbsp;&nbsp;
-        {value?.length  ? value : ' All'}
+        <FilterDiv>
+          <div
+            onClick={() => setModalIsOpen((prevState) => !prevState)}
+            data-testid="modal-test-button"
+          >
+            Filter Character &nbsp;&nbsp;
+            {value?.length ? value : " All"}
+          </div>
+        </FilterDiv>
       </div>
       <InfiniteScroll
         dataLength={count}
@@ -65,12 +95,15 @@ const CharactersList: React.FC = () => {
         hasMore={true}
         loader={nextPage !== null ? <h6>Loading...</h6> : <></>}
       >
-        <CharactersContainer>
+        <Container>
           {characters?.map((character, index) => (
-            <Character key={index} {...character} />
+            <CharactersContainer>
+              <Character key={index} {...character} />
+            </CharactersContainer>
           ))}
-        </CharactersContainer>
+        </Container>
       </InfiniteScroll>
+
       {modalIsOpen && (
         <FilterModal
           modalIsOpen={modalIsOpen}

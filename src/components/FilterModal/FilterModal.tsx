@@ -6,7 +6,38 @@ const InputContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 13px;
+  font-size: 19px;
+  &:last-child {
+    margin-bottom: 10px;
+  }
+
+  input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    transform: translateY(-0.075em);
+    background: #c4c4c4;
+    display: grid;
+    place-content: center;
+  }
+  input::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+  }
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+    background-color: #0057ff;
+  }
 `;
 
 const customStyles: any = {
@@ -18,6 +49,8 @@ const customStyles: any = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     width: "327px",
+    padding: 0,
+    overflow: "hidden",
   },
 };
 
@@ -26,7 +59,7 @@ interface IModalProps {
   closeModal(): void;
   handleChange(event: React.ChangeEvent): any;
   value: string;
-  handleClick():void;
+  handleClick(): void;
 }
 
 // Data filter
@@ -50,15 +83,38 @@ const FilterModal: React.FC<IModalProps> = ({
       contentLabel="Example Modal"
     >
       <InputContainer
-        style={{ borderBottom: "1px solid black", paddingBottom: 10 }}
+        style={{ borderBottom: "0.5px solid #808080", paddingBottom: 5 }}
       >
-        <strong>Filter</strong>
-        <button data-testid={'close-modal-button'} onClick={closeModal}>x</button>
+        <div
+          style={{
+            paddingTop: 13,
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+            marginLeft: 16,
+            marginRight: 16,
+          }}
+        >
+          <strong>Filter</strong>
+          <button
+            style={{
+              background: "none",
+              border: "none",
+              fontSize: 22,
+              marginBottom: 2,
+            }}
+            data-testid={"close-modal-button"}
+            onClick={closeModal}
+          >
+            x
+          </button>
+        </div>
       </InputContainer>
 
-      <InputContainer>
+      <InputContainer style={{ marginLeft: 16 }}>
         <label>Rick</label>
         <input
+          style={{ marginRight: 32 }}
           type="radio"
           checked={value === FilterData.RICK}
           name={FilterData.RICK}
@@ -66,9 +122,10 @@ const FilterModal: React.FC<IModalProps> = ({
           onChange={handleChange}
         />
       </InputContainer>
-      <InputContainer>
+      <InputContainer style={{ marginLeft: 16 }}>
         <label>Morty</label>
         <input
+          style={{ marginRight: 32 }}
           type="radio"
           checked={value === FilterData.MORTY}
           name={FilterData.MORTY}
@@ -76,8 +133,13 @@ const FilterModal: React.FC<IModalProps> = ({
           onChange={handleChange}
         />
       </InputContainer>
-      <InputContainer>
-        <button onClick={handleClick}>Clear</button>
+      <InputContainer style={{ marginLeft: 8}}>
+        <button
+          style={{ border: "none", background: "transparent", color:'#060606' }}
+          onClick={handleClick}
+        >
+          Clear
+        </button>
       </InputContainer>
     </Modal>
   );
