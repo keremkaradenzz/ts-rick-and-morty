@@ -102,7 +102,5 @@ describe("Test Characters List page", () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
       expect(closeBtn).not.toBeVisible();
     });
-
-    // eslint-disable-next-line testing-library/no-unnecessary-act
   });
 });
