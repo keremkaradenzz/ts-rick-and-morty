@@ -48,8 +48,8 @@ const CharactersList: React.FC = () => {
   } = useGetByCharacters();
 
   useEffect(() => {
-    getCharacters({ variables: { page: 1, character: "" } });
-  }, [getCharacters]);
+    getCharacters({ variables: { page: 1, character: value } });
+  }, [getCharacters, value]);
 
   const onLoadMore = () => {
     getMoreCharacters(currentPage + 1, value);
