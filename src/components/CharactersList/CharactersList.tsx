@@ -51,8 +51,8 @@ const CharactersList: React.FC = () => {
     getCharacters({ variables: { page: 1, character: "" } });
   }, [getCharacters]);
 
-  const onLoadMore = (character = "") => {
-    getMoreCharacters(currentPage + 1, character);
+  const onLoadMore = () => {
+    getMoreCharacters(currentPage + 1, value);
   };
 
   const closeModal = () => {

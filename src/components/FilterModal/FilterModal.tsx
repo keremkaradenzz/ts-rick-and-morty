@@ -62,11 +62,25 @@ interface IModalProps {
   handleClick(): void;
 }
 
-// Data filter
-enum FilterData {
-  RICK = "rick",
-  MORTY = "morty",
+interface FilterDataType {
+  label: string;
+  value: string;
 }
+// Data filter
+const filterData: FilterDataType[] = [
+  {
+    label: "Rick",
+    value: "rick",
+  },
+  {
+    label: "Morty",
+    value: "morty",
+  },
+  {
+    label: "Summer",
+    value: "summer",
+  },
+];
 
 const FilterModal: React.FC<IModalProps> = ({
   modalIsOpen,
@@ -110,32 +124,26 @@ const FilterModal: React.FC<IModalProps> = ({
           </button>
         </div>
       </InputContainer>
-
-      <InputContainer style={{ marginLeft: 16 }}>
-        <label>Rick</label>
-        <input
-          style={{ marginRight: 32 }}
-          type="radio"
-          checked={value === FilterData.RICK}
-          name={FilterData.RICK}
-          value={value}
-          onChange={handleChange}
-        />
-      </InputContainer>
-      <InputContainer style={{ marginLeft: 16 }}>
-        <label>Morty</label>
-        <input
-          style={{ marginRight: 32 }}
-          type="radio"
-          checked={value === FilterData.MORTY}
-          name={FilterData.MORTY}
-          value={value}
-          onChange={handleChange}
-        />
-      </InputContainer>
-      <InputContainer style={{ marginLeft: 8}}>
+      {filterData.map((item, index) => (
+        <InputContainer key={index} style={{ marginLeft: 16 }}>
+          <label>{item.label}</label>
+          <input
+            style={{ marginRight: 32 }}
+            type="radio"
+            checked={value === item.value}
+            name={item.value}
+            value={value}
+            onChange={handleChange}
+          />
+        </InputContainer>
+      ))}
+      <InputContainer style={{ marginLeft: 8 }}>
         <button
-          style={{ border: "none", background: "transparent", color:'#060606' }}
+          style={{
+            border: "none",
+            background: "transparent",
+            color: "#060606",
+          }}
           onClick={handleClick}
         >
           Clear
